@@ -1,0 +1,47 @@
+<resources>
+    <string name="app_name">orarioMarconi</string>
+    <string name="e1_1"></string>
+    <string name="e1_2"></string>
+    <string name="e1_3"></string>
+    <string name="e1_4"></string>
+    <string name="e1_5"></string>
+    <string name="e1_6"></string>
+    <string name="e1_7"></string>
+    <string name="e1_8"></string>
+
+    <string name="e2_1"></string>
+    <string name="e2_2"></string>
+    <string name="e2_3"></string>
+    <string name="e2_4"></string>
+    <string name="e2_5"></string>
+    <string name="e2_6"></string>
+    <string name="e2_7"></string>
+    <string name="e2_8"></string>
+
+    <string name="e3_1"></string>
+    <string name="e3_2"></string>
+    <string name="e3_3"></string>
+    <string name="e3_4"></string>
+    <string name="e3_5"></string>
+    <string name="e3_6"></string>
+    <string name="e3_7"></string>
+    <string name="e3_8"></string>
+
+    <string name="e4_1"></string>
+    <string name="e4_2"></string>
+    <string name="e4_3"></string>
+    <string name="e4_4"></string>
+    <string name="e4_5"></string>
+    <string name="e4_6"></string>
+    <string name="e4_7"></string>
+    <string name="e4_8"></string>
+
+    <string name="e5_1"></string>
+    <string name="e5_2"></string>
+    <string name="e5_3"></string>
+    <string name="e5_4"></string>
+    <string name="e5_5"></string>
+    <string name="e5_6"></string>
+    <string name="e5_7"></string>
+    <string name="e5_8"></string>
+</resources>

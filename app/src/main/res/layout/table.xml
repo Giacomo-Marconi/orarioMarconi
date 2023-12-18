@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <HorizontalScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_centerVertical="true">
+
+        <TableLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="15dp"
+            android:stretchColumns="*"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <TableRow>
+
+                <TextView
+                    android:id="@+id/giorno1"
+                    android:gravity="center"
+                    android:padding="3dip"
+                    android:text="lunedì" />
+
+                <TextView
+                    android:id="@+id/giorno2"
+                    android:gravity="center"
+                    android:padding="3dip"
+                    android:text="martedì" />
+
+                <TextView
+                    android:id="@+id/giorno3"
+                    android:gravity="center"
+                    android:padding="3dip"
+                    android:text="mercoledì" />
+
+                <TextView
+                    android:id="@+id/giorno4"
+                    android:gravity="center"
+                    android:padding="3dip"
+                    android:text="giovedì" />
+
+                <TextView
+                    android:id="@+id/giorno5"
+                    android:gravity="center"
+                    android:padding="3dip"
+                    android:text="venerdì" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:id="@+id/t1_1"
+                    android:gravity="center"
+                    android:padding="3dip"
+                    android:text="@string/e1_1" />
+
+                <TextView
+                    android:id="@+id/t2_1"
+                    android:gravity="center"
+                    android:padding="3dip"
+                    android:text="@string/e2_1" />
+
+                <TextView
+                    android:id="@+id/t3_1"
+                    android:gravity="center"
+                    android:padding="3dip"
+                    android:text="@string/e3_1" />
+
+                <TextView
+                    android:id="@+id/t4_1"
+                    android:gravity="center"
+                    android:padding="3dip"
+                    android:text="@string/e4_1" />
+
+                <TextView
+                    android:id="@+id/t5_1"
+                    android:gravity="center"
+                    android:padding="3dip"
+                    android:text="@string/e5_1" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:id="@+id/t1_2"
+                    android:gravity="center"
+                    android:padding="3dip"
+                    android:text="@string/e1_2" />
+
+                <TextView
+                    android:id="@+id/t2_2"
+                    android:gravity="center"
+                    android:padding="3dip"
+                    android:text="@string/e2_2" />
+
+                <TextView
+                    android:id="@+id/t3_2"
+                    android:gravity="center"
+                    android:padding="3dip"
+                    android:text="@string/e3_2" />
+
+                <TextView
+                    android:id="@+id/t4_2"
+                    android:gravity="center"
+                    android:padding="3dip"
+                    android:text="@string/e4_2" />
+
+                <TextView
+                    android:id="@+id/t5_2"
+                    android:gravity="center"
+                    android:padding="3dip"
+                    android:text="@string/e5_2" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:id="@+id/t1_3"
+                    android:gravity="center"
+                    android:padding="3dip"
+                    android:text="@string/e1_3" />
+
+                <TextView
+                    android:id="@+id/t2_3"
+                    android:gravity="center"
+                    android:padding="3dip"
+                    android:text="@string/e2_3" />
+
+                <TextView
+                    android:id="@+id/t3_3"
+                    android:gravity="center"
+                    android:padding="3dip"
+                    android:text="@string/e3_3" />
+
+                <TextView
+                    android:id="@+id/t4_3"
+                    android:gravity="center"
+                    android:padding="3dip"
+                    android:text="@string/e4_3" />
+
+                <TextView
+                    android:id="@+id/t5_3"
+                    android:gravity="center"
+                    android:padding="3dip"
+                    android:text="@string/e5_3" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:id="@+id/t1_4"
+                    android:gravity="center"
+                    android:padding="3dip"
+                    android:text="@string/e1_4" />
+
+                <TextView
+                    android:id="@+id/t2_4"
+                    android:gravity="center"
+                    android:padding="3dip"
+                    android:text="@string/e2_4" />
+
+                <TextView
+                    android:id="@+id/t3_4"
+                    android:gravity="center"
+                    android:padding="3dip"
+                    android:text="@string/e3_4" />
+
+                <TextView
+                    android:id="@+id/t4_4"
+                    android:gravity="center"
+                    android:padding="3dip"
+                    android:text="@string/e4_4" />
+
+                <TextView
+                    android:id="@+id/t5_4"
+                    android:gravity="center"
+                    android:padding="3dip"
+                    android:text="@string/e5_4" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:id="@+id/t1_5"
+                    android:gravity="center"
+                    android:padding="3dip"
+                    android:text="@string/e1_5" />
+
+                <TextView
+                    android:id="@+id/t2_5"
+                    android:gravity="center"
+                    android:padding="3dip"
+                    android:text="@string/e2_5" />
+
+                <TextView
+                    android:id="@+id/t3_5"
+                    android:gravity="center"
+                    android:padding="3dip"
+                    android:text="@string/e3_5" />
+
+                <TextView
+                    android:id="@+id/t4_5"
+                    android:gravity="center"
+                    android:padding="3dip"
+                    android:text="@string/e4_5" />
+
+                <TextView
+                    android:id="@+id/t5_5"
+                    android:gravity="center"
+                    android:padding="3dip"
+                    android:text="@string/e5_5" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:id="@+id/t1_6"
+                    android:gravity="center"
+                    android:padding="3dip"
+                    android:text="@string/e1_6" />
+
+                <TextView
+                    android:id="@+id/t2_6"
+                    android:gravity="center"
+                    android:padding="3dip"
+                    android:text="@string/e2_6" />
+
+                <TextView
+                    android:id="@+id/t3_6"
+                    android:gravity="center"
+                    android:padding="3dip"
+                    android:text="@string/e3_6" />
+
+                <TextView
+                    android:id="@+id/t4_6"
+                    android:gravity="center"
+                    android:padding="3dip"
+                    android:text="@string/e4_6" />
+
+                <TextView
+                    android:id="@+id/t5_6"
+                    android:gravity="center"
+                    android:padding="3dip"
+                    android:text="@string/e5_6" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:id="@+id/t1_7"
+                    android:gravity="center"
+                    android:padding="3dip"
+                    android:text="@string/e1_7" />
+
+                <TextView
+
+                    android:id="@+id/t2_7"
+                    android:gravity="center"
+                    android:padding="3dip"
+                    android:text="@string/e2_7" />
+
+                <TextView
+                    android:id="@+id/t3_7"
+                    android:gravity="center"
+                    android:padding="3dip"
+                    android:text="@string/e3_7" />
+
+                <TextView
+                    android:id="@+id/t4_7"
+                    android:gravity="center"
+                    android:padding="3dip"
+                    android:text="@string/e4_7" />
+
+                <TextView
+                    android:id="@+id/t5_7"
+                    android:gravity="center"
+                    android:padding="3dip"
+                    android:text="@string/e5_7" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:id="@+id/t1_8"
+                    android:gravity="center"
+                    android:padding="3dip"
+                    android:text="@string/e1_8" />
+
+                <TextView
+                    android:id="@+id/t2_8"
+                    android:gravity="center"
+                    android:padding="3dip"
+                    android:text="@string/e2_8" />
+
+                <TextView
+
+                    android:id="@+id/t3_8"
+                    android:gravity="center"
+                    android:padding="3dip"
+                    android:text="@string/e3_8" />
+
+                <TextView
+
+                    android:id="@+id/t4_8"
+                    android:gravity="center"
+                    android:padding="3dip"
+                    android:text="@string/e4_8" />
+
+                <TextView
+
+                    android:id="@+id/t5_8"
+                    android:gravity="center"
+                    android:padding="3dip"
+                    android:text="@string/e5_8" />
+            </TableRow>
+
+        </TableLayout>
+
+
+    </HorizontalScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
