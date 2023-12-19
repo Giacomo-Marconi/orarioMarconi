@@ -29,7 +29,6 @@ public class PagTable extends AppCompatActivity {
 
         InputStream inputStream = this.getResources().openRawResource(R.raw.ore);
         Scanner scn = new Scanner(inputStream).useDelimiter("\\A");
-
         while (scn.hasNextLine()) {
             line.add(scn.nextLine().split(";"));
         }
@@ -40,13 +39,6 @@ public class PagTable extends AppCompatActivity {
 
 
         String[] filtro = leggi();
-
-
-        /*for (int j = 0; j < ore.get(filtro[0]).get(filtro[1]).length; j++) {
-            String st = " " + ore.get(filtro[0]).get(filtro[1])[j][0]  + " " + ore.get(filtro[0]).get(filtro[1])[j][1] + " " + ore.get(filtro[0]).get(filtro[1])[j][2] + " " + ore.get(filtro[0]).get(filtro[1])[j][3];
-            Log.d("jecky2", " --> " + st);
-        }*/
-
 
         String[][] a = {{"SAGLIA SARA","3BI","LIT","A320","1","7"}};
         Log.d("jecky", " filtri:" + filtro[0] + " " + filtro[1] + " " + filtro[2]);
@@ -62,43 +54,47 @@ public class PagTable extends AppCompatActivity {
         visual.setText(filtro[1]);
     }
 
-    //int textViewId = getResources().getIdentifier(idText, "id", getPackageName());
-
-    // Trova il riferimento al TextView
-    //tuoTextView = findViewById(textViewId);
-
     public void visualizza(String[][] a, int not){
+        String[] valore = new String[40];
+        int[] passati = new int[40];
 
-        int[] passati = new int[a.length];
-        String[] valore = new String[a.length];
-
-        for (int i = 0; i < valore.length; i++) {
+        for (int i = 0; i < 40; i++) {
             valore[i]="";
+            passati[i]=0;
         }
 
         for (int i = 0; i < a.length; i++) {
-            Log.d("jecky", "fatto"+i);
-            for (int j = 0; j < a[i].length-2; j++) {
-                if (not==j) continue;
-                valore[i]+=a[i][j]+"\n";
+            Log.d("jecky", "fatto: "+i);
+
+            int giorno = Integer.parseInt(a[i][4]);
+            int ora = Integer.parseInt(a[i][5]);
+
+            if(passati[(giorno-1)*8+ora]==1){
+                Log.d("jecky2", "compre: "+a[i][0]);
+                valore[(giorno-1)*8+ora]=a[i][0]+"\n"+valore[(giorno-1)*8+ora];
+            }else {
+                passati[(giorno-1)*8+ora] = 1;
+                for (int j = 0; j < a[i].length - 2; j++) {
+                    if (not == j) continue;
+                    valore[(giorno-1)*8+ora] += a[i][j] + "\n";
+                }
             }
-            //t4_8"
+
             //0    ;1     ;2      ;3   ;4     ;5
             //prof;classe;materia;aula;giorno;ora
-            String id = "t"+a[i][4]+"_"+a[i][5];
-            Log.d("jecky", "id"+id);
+            String id = "t"+giorno+"_"+ora;//t4_8"
+            Log.d("jecky", "id: "+id);
             int cella = getResources().getIdentifier(id, "id", getPackageName());
             TextView textView = findViewById(cella);
-
-            textView.setText(valore[i]);
+            textView.setText(valore[(giorno-1)*8+ora]);
         }
 
 
     }
 
-
-
     protected String[] leggi(){
+        //prof/classi/aule = tipo
+        //uno tipo, due nome di tipo, tre da skippare
         String[] s = new String[3];
         SharedPreferences filtro = getSharedPreferences("cose", Context.MODE_PRIVATE);
         s[0] = filtro.getString("1", "prof");
@@ -133,7 +129,6 @@ public class PagTable extends AppCompatActivity {
     }
 
     public static Map<String, String[][]> readAule(ArrayList<String[]> line) {
-
         Map<String, String[][]> aule = new HashMap<String, String[][]>();
         String[] passati = new String[1000];
 
@@ -170,7 +165,6 @@ public class PagTable extends AppCompatActivity {
 
 
     public static Map<String, String[][]> readClassi(ArrayList<String[]> line) {
-
         Map<String, String[][]> classi = new HashMap<String, String[][]>();
         String[] passati = new String[1000];
 

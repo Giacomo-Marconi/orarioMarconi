@@ -27,9 +27,10 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        int colore = Color.parseColor("#FF00FF");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.start);
+
+        int colore = Color.parseColor("#FF00FF");
 
         Button conferma = findViewById(R.id.conferma);
         AutoCompleteTextView input = findViewById(R.id.input);
@@ -40,17 +41,14 @@ public class MainActivity extends AppCompatActivity {
         InputStream inputStream = this.getResources().openRawResource(R.raw.ore);
         Scanner scn = new Scanner(inputStream).useDelimiter("\\A");
 
-        ArrayList<String> p = new ArrayList<String>();
-        ArrayList<String> c = new ArrayList<String>();
-        ArrayList<String> a = new ArrayList<String>();
+        // lista di p prof, c classi, a aule
+        ArrayList<String> p = new ArrayList<String>(), c = new ArrayList<String>(), a = new ArrayList<String>();
+
         String[] line;
         while (scn.hasNextLine()) {
             line=scn.nextLine().split(";");
-            //prof
             if (!check(p, p.size(), line[0])) p.add(line[0]);
-            //classe
             if(!check(c, c.size(), line[1])) c.add(line[1]);
-            //aule
             if(!check(a, a.size(), line[3])) a.add(line[3]);
         }
 
@@ -59,10 +57,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Log.d("jecky2", "cliccato chip prof");
-                chipProf.setChipBackgroundColor(ColorStateList.valueOf(colore));
-                chipClassi.setChipBackgroundColor(ColorStateList.valueOf(0));
-                chipAule.setChipBackgroundColor(ColorStateList.valueOf(0));
-                input.setAdapter(updateAdapter(updateSugetimenti(p)));
+                updateColorChip(chipProf, chipClassi, chipAule, colore);
+                input.setAdapter(arrayToArrayAdapter(arrayListToArray(p)));
                 save[0]="prof";
                 save[1] = "0";
                 input.setText("");
@@ -72,11 +68,9 @@ public class MainActivity extends AppCompatActivity {
         chipClassi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                chipClassi.setChipBackgroundColor(ColorStateList.valueOf(colore));
-                chipProf.setChipBackgroundColor(ColorStateList.valueOf(0));
-                chipAule.setChipBackgroundColor(ColorStateList.valueOf(0));
                 Log.d("jecky2", "cliccato chip classi");
-                input.setAdapter(updateAdapter(updateSugetimenti(c)));
+                updateColorChip(chipClassi, chipProf, chipAule, colore);
+                input.setAdapter(arrayToArrayAdapter(arrayListToArray(c)));
                 save[0]="classi";
                 save[1] = "1";
                 input.setText("");
@@ -87,10 +81,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Log.d("jecky2", "cliccato chip aule");
-                chipAule.setChipBackgroundColor(ColorStateList.valueOf(colore));
-                chipProf.setChipBackgroundColor(ColorStateList.valueOf(0));
-                chipClassi.setChipBackgroundColor(ColorStateList.valueOf(0));
-                input.setAdapter(updateAdapter(updateSugetimenti(a)));
+                updateColorChip(chipAule, chipProf, chipClassi, colore);
+                input.setAdapter(arrayToArrayAdapter(arrayListToArray(a)));
                 save[0]="aule";
                 save[1] = "3";
                 input.setText("");
@@ -98,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        String[] suggerimenti = new String[]{};
+        String[] suggerimenti = {};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, suggerimenti);
         input.setAdapter(adapter);
 
@@ -113,6 +105,12 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    public void updateColorChip(Chip selected, Chip c, Chip c1, int colore){
+        selected.setChipBackgroundColor(ColorStateList.valueOf(colore));
+        c.setChipBackgroundColor(ColorStateList.valueOf(0));
+        c1.setChipBackgroundColor(ColorStateList.valueOf(0));
+    }
+
     public static boolean check(ArrayList<String> a, int limit,  String val){
         for (int i = 0; i < limit; i++) {
             if (a.get(i).equals(val)) return true;
@@ -122,6 +120,8 @@ public class MainActivity extends AppCompatActivity {
 
 
     protected void salva(String uno, String due, String tre){
+        //prof/classi/aule = tipo
+        //uno tipo, due nome di tipo, tre da skippare
         SharedPreferences sharedPreferences = getSharedPreferences("cose", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Log.d("jecky2", "salvato --> " + uno + " " + due + " " + tre);
@@ -132,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public String[] updateSugetimenti(ArrayList<String> a){
+    public String[] arrayListToArray(ArrayList<String> a){
         String[] s = new String[a.size()];
         for (int i = 0; i < a.size(); i++) {
             s[i]=a.get(i);
@@ -140,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
         return s;
     }
 
-    public ArrayAdapter<String> updateAdapter(String[] s){
+    public ArrayAdapter<String> arrayToArrayAdapter(String[] s){
         ArrayAdapter<String> adapter = new ArrayAdapter<>(MainActivity.this, android.R.layout.simple_dropdown_item_1line, s);
         return adapter;
     }
