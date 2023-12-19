@@ -21,6 +21,8 @@ public class PagTable extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.table);
 
+        TextView visual = findViewById(R.id.visual);
+
         Map<String, Map<String, String[][]>> ore = new HashMap<String, Map<String, String[][]>>();
 
         ArrayList<String[]> line = new ArrayList<String[]>();
@@ -56,6 +58,8 @@ public class PagTable extends AppCompatActivity {
         }
         else
             visualizza(ore.get(filtro[0]).get(filtro[1]), Integer.parseInt(filtro[2]));
+
+        visual.setText(filtro[1]);
     }
 
     //int textViewId = getResources().getIdentifier(idText, "id", getPackageName());

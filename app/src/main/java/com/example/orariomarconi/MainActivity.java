@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -22,8 +24,10 @@ public class MainActivity extends AppCompatActivity {
 
     public String[] save = {"prof","0"};
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        int colore = Color.parseColor("#FF00FF");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.start);
 
@@ -55,19 +59,27 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Log.d("jecky2", "cliccato chip prof");
+                chipProf.setChipBackgroundColor(ColorStateList.valueOf(colore));
+                chipClassi.setChipBackgroundColor(ColorStateList.valueOf(0));
+                chipAule.setChipBackgroundColor(ColorStateList.valueOf(0));
                 input.setAdapter(updateAdapter(updateSugetimenti(p)));
                 save[0]="prof";
                 save[1] = "0";
+                input.setText("");
             }
         });
 
         chipClassi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                chipClassi.setChipBackgroundColor(ColorStateList.valueOf(colore));
+                chipProf.setChipBackgroundColor(ColorStateList.valueOf(0));
+                chipAule.setChipBackgroundColor(ColorStateList.valueOf(0));
                 Log.d("jecky2", "cliccato chip classi");
                 input.setAdapter(updateAdapter(updateSugetimenti(c)));
                 save[0]="classi";
                 save[1] = "1";
+                input.setText("");
             }
         });
 
@@ -75,9 +87,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Log.d("jecky2", "cliccato chip aule");
+                chipAule.setChipBackgroundColor(ColorStateList.valueOf(colore));
+                chipProf.setChipBackgroundColor(ColorStateList.valueOf(0));
+                chipClassi.setChipBackgroundColor(ColorStateList.valueOf(0));
                 input.setAdapter(updateAdapter(updateSugetimenti(a)));
                 save[0]="aule";
                 save[1] = "3";
+                input.setText("");
             }
         });
 
