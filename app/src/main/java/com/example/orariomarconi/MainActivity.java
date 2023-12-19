@@ -31,10 +31,33 @@ public class MainActivity extends AppCompatActivity {
         Button prof = findViewById(R.id.prof);
         Button classi = findViewById(R.id.classi);
         Button aule = findViewById(R.id.aule);
-
         AutoCompleteTextView input = findViewById(R.id.input);
 
-        String[] suggerimenti = {};
+        ArrayList<String> cose = new ArrayList<String>();
+
+        InputStream inputStream = this.getResources().openRawResource(R.raw.ore);
+        Scanner scn = new Scanner(inputStream).useDelimiter("\\A");
+
+        String[] line;
+        while (scn.hasNextLine()) {
+            line=scn.nextLine().split(";");
+            //prof
+            if (!check(cose, cose.size(), line[0])) cose.add(line[0]);
+            //classe
+            if(!check(cose, cose.size(), line[1])) cose.add(line[1]);
+            //aule
+            if(!check(cose, cose.size(), line[3])) cose.add(line[3]);
+        }
+
+
+
+
+        String[] suggerimenti = new String[cose.size()];
+
+        for (int i = 0; i < cose.size(); i++) {
+            suggerimenti[i]=cose.get(i);
+        }
+
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, suggerimenti);
         input.setAdapter(adapter);
 
@@ -67,6 +90,13 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    public static boolean check(ArrayList<String> a, int limit,  String val){
+        for (int i = 0; i < limit; i++) {
+            if (a.get(i).equals(val)) return true;
+        }
+        return false;
     }
 
 
