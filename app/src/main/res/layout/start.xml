@@ -6,34 +6,14 @@
     android:layout_height="match_parent">
 
     <Button
-        android:id="@+id/prof"
+        android:id="@+id/conferma"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp"
-        android:text="Prof"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/classi"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/classi"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp"
-        android:text="Classe"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/aule"
-        app:layout_constraintStart_toEndOf="@+id/prof" />
-
-    <Button
-        android:id="@+id/aule"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp"
-        android:text="Aule"
+        android:layout_marginBottom="20dp"
+        android:text="Conferma"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/classi" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <AutoCompleteTextView
         android:id="@+id/input"
@@ -49,5 +29,45 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.171" />
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chipgruppo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="75dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="75dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/input">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipProf"
+            android:text="prof"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:textAlignment="center" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipClassi"
+            android:text="classi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:textAlignment="center" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipAule"
+            android:text="aule"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:textAlignment="center" />
+    </com.google.android.material.chip.ChipGroup>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -13,79 +12,85 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 
+import com.google.android.material.chip.Chip;
+
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
 
 public class MainActivity extends AppCompatActivity {
+
+    public String[] save = {"prof","0"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.start);
 
-
-
-        Button prof = findViewById(R.id.prof);
-        Button classi = findViewById(R.id.classi);
-        Button aule = findViewById(R.id.aule);
+        Button conferma = findViewById(R.id.conferma);
         AutoCompleteTextView input = findViewById(R.id.input);
-
-        ArrayList<String> cose = new ArrayList<String>();
+        Chip chipProf = findViewById(R.id.chipProf);
+        Chip chipClassi = findViewById(R.id.chipClassi);
+        Chip chipAule = findViewById(R.id.chipAule);
 
         InputStream inputStream = this.getResources().openRawResource(R.raw.ore);
         Scanner scn = new Scanner(inputStream).useDelimiter("\\A");
 
+        ArrayList<String> p = new ArrayList<String>();
+        ArrayList<String> c = new ArrayList<String>();
+        ArrayList<String> a = new ArrayList<String>();
         String[] line;
         while (scn.hasNextLine()) {
             line=scn.nextLine().split(";");
             //prof
-            if (!check(cose, cose.size(), line[0])) cose.add(line[0]);
+            if (!check(p, p.size(), line[0])) p.add(line[0]);
             //classe
-            if(!check(cose, cose.size(), line[1])) cose.add(line[1]);
+            if(!check(c, c.size(), line[1])) c.add(line[1]);
             //aule
-            if(!check(cose, cose.size(), line[3])) cose.add(line[3]);
+            if(!check(a, a.size(), line[3])) a.add(line[3]);
         }
 
 
+        chipProf.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("jecky2", "cliccato chip prof");
+                input.setAdapter(updateAdapter(updateSugetimenti(p)));
+                save[0]="prof";
+                save[1] = "0";
+            }
+        });
+
+        chipClassi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("jecky2", "cliccato chip classi");
+                input.setAdapter(updateAdapter(updateSugetimenti(c)));
+                save[0]="classi";
+                save[1] = "1";
+            }
+        });
+
+        chipAule.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("jecky2", "cliccato chip aule");
+                input.setAdapter(updateAdapter(updateSugetimenti(a)));
+                save[0]="aule";
+                save[1] = "3";
+            }
+        });
 
 
-        String[] suggerimenti = new String[cose.size()];
-
-        for (int i = 0; i < cose.size(); i++) {
-            suggerimenti[i]=cose.get(i);
-        }
-
+        String[] suggerimenti = new String[]{};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, suggerimenti);
         input.setAdapter(adapter);
 
-
-        prof.setOnClickListener(new View.OnClickListener() {
+        conferma.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                salva("prof", input.getText().toString(), "0");
-                Intent intent = new Intent(MainActivity.this, PagTable.class);
-                startActivity(intent);
-            }
-        });
-
-        classi.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.d("jecky2", "cliccato --> classe" + input.getText().toString());
-                salva("classi", input.getText().toString(), "1");
-                Intent intent = new Intent(MainActivity.this, PagTable.class);
-                startActivity(intent);
-            }
-        });
-
-        aule.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                salva("aule", input.getText().toString(), "3");
+                Log.d("jecky2", "cliccato --> conferma" + input.getText().toString());
+                salva(save[0], input.getText().toString(), save[1]);
                 Intent intent = new Intent(MainActivity.this, PagTable.class);
                 startActivity(intent);
             }
@@ -110,5 +115,18 @@ public class MainActivity extends AppCompatActivity {
         editor.apply();
     }
 
+
+    public String[] updateSugetimenti(ArrayList<String> a){
+        String[] s = new String[a.size()];
+        for (int i = 0; i < a.size(); i++) {
+            s[i]=a.get(i);
+        }
+        return s;
+    }
+
+    public ArrayAdapter<String> updateAdapter(String[] s){
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(MainActivity.this, android.R.layout.simple_dropdown_item_1line, s);
+        return adapter;
+    }
 
 }
