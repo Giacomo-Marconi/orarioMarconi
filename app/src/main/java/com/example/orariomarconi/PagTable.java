@@ -1,12 +1,18 @@
 package com.example.orariomarconi;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.chip.Chip;
 
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -22,6 +28,7 @@ public class PagTable extends AppCompatActivity {
         setContentView(R.layout.table);
 
         TextView visual = findViewById(R.id.visual);
+        Chip back = findViewById(R.id.chipBack);
 
         Map<String, Map<String, String[][]>> ore = new HashMap<String, Map<String, String[][]>>();
 
@@ -36,6 +43,15 @@ public class PagTable extends AppCompatActivity {
         ore.put("prof", readProf(line));
         ore.put("classi", readClassi(line));
         ore.put("aule", readAule(line));
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(PagTable.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
 
         String[] filtro = leggi();
@@ -94,7 +110,7 @@ public class PagTable extends AppCompatActivity {
 
     protected String[] leggi(){
         //prof/classi/aule = tipo
-        //uno tipo, due nome di tipo, tre da skippare
+        //1 tipo, 2 nome di tipo, 3 da skippare
         String[] s = new String[3];
         SharedPreferences filtro = getSharedPreferences("cose", Context.MODE_PRIVATE);
         s[0] = filtro.getString("1", "prof");

@@ -32,11 +32,11 @@ public class MainActivity extends AppCompatActivity {
 
         int colore = Color.parseColor("#FF00FF");
 
-        Button conferma = findViewById(R.id.conferma);
         AutoCompleteTextView input = findViewById(R.id.input);
         Chip chipProf = findViewById(R.id.chipProf);
         Chip chipClassi = findViewById(R.id.chipClassi);
         Chip chipAule = findViewById(R.id.chipAule);
+        Chip chipConferma = findViewById(R.id.chipConferma);
 
         InputStream inputStream = this.getResources().openRawResource(R.raw.ore);
         Scanner scn = new Scanner(inputStream).useDelimiter("\\A");
@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Log.d("jecky2", "cliccato chip prof");
-                updateColorChip(chipProf, chipClassi, chipAule, colore);
+                updateColorChip(chipProf, chipClassi, chipAule, chipConferma, colore);
                 input.setAdapter(arrayToArrayAdapter(arrayListToArray(p)));
                 save[0]="prof";
                 save[1] = "0";
@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Log.d("jecky2", "cliccato chip classi");
-                updateColorChip(chipClassi, chipProf, chipAule, colore);
+                updateColorChip(chipClassi, chipProf, chipAule, chipConferma, colore);
                 input.setAdapter(arrayToArrayAdapter(arrayListToArray(c)));
                 save[0]="classi";
                 save[1] = "1";
@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Log.d("jecky2", "cliccato chip aule");
-                updateColorChip(chipAule, chipProf, chipClassi, colore);
+                updateColorChip(chipAule, chipProf, chipClassi, chipConferma, colore);
                 input.setAdapter(arrayToArrayAdapter(arrayListToArray(a)));
                 save[0]="aule";
                 save[1] = "3";
@@ -94,21 +94,27 @@ public class MainActivity extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, suggerimenti);
         input.setAdapter(adapter);
 
-        conferma.setOnClickListener(new View.OnClickListener() {
+        chipConferma.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("jecky2", "cliccato --> conferma" + input.getText().toString());
-                salva(save[0], input.getText().toString(), save[1]);
-                Intent intent = new Intent(MainActivity.this, PagTable.class);
-                startActivity(intent);
+                Log.d("jecky2", "cliccato --> Chipconferma" + input.getText().toString());
+                if (check(p, p.size(), input.getText().toString()) || check(c, c.size(), input.getText().toString()) || check(a, a.size(), input.getText().toString())){
+                    chipConferma.setChipBackgroundColor(ColorStateList.valueOf(Color.GREEN));
+                    salva(save[0], input.getText().toString(), save[1]);
+                    Intent intent = new Intent(MainActivity.this, PagTable.class);
+                    startActivity(intent);
+                    finish();
+                }else chipConferma.setChipBackgroundColor(ColorStateList.valueOf(Color.RED));
             }
         });
+
     }
 
-    public void updateColorChip(Chip selected, Chip c, Chip c1, int colore){
+    public void updateColorChip(Chip selected, Chip c, Chip c1, Chip conf, int colore){
         selected.setChipBackgroundColor(ColorStateList.valueOf(colore));
         c.setChipBackgroundColor(ColorStateList.valueOf(0));
         c1.setChipBackgroundColor(ColorStateList.valueOf(0));
+        conf.setChipBackgroundColor(ColorStateList.valueOf(0));
     }
 
     public static boolean check(ArrayList<String> a, int limit,  String val){
